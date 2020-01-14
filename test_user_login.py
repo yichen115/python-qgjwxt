@@ -4,6 +4,7 @@ import requests
 import time
 from selenium.webdriver.common.keys import Keys
 from requests.cookies import RequestsCookieJar
+import jo
 
 #browser=webdriver.PhantomJS(executable_path='D:/software/phantomjs-2.1.1-windows/bin/phantomjs')
 #browser.get("http://jwxt.sdaeu.edu.cn/jwweb/home.aspx")
@@ -53,19 +54,27 @@ headers1={
 
 r=requests.get(img_src,headers=headers1)
 img_content=r.content
-print("[*]正在下载验证码...\n")
+print("\n[*]正在下载验证码...\n")
 with open('check.jpg','wb') as f:
 	f.write(img_content)
+
+time.sleep(2)
+print("[*]验证码下载完成！\n")
+text=jo.jo('check.jpg')
+t1=text[3]
+t2=text[7]
+t3=text[11]
+t4=text[-1]
+code=t1+t2+t3+t4
+print("[*]验证码识别为："+code)
 
 #把对应的“学号”和“密码”换成自己的
 browser.find_element_by_id("txt_asmcdefsddsd").send_keys("学号")
 browser.find_element_by_id("txt_asmcdefsddsd").send_keys(Keys.TAB)
 browser.find_element_by_id("txt_pewerwedsdfsdff").send_keys("密码")
-
-#没有识别功能手动输入
-code = input("[*]请输入验证码: ")
 browser.find_element_by_id("txt_sdertfgsadscxcadsads").send_keys(code)
 browser.find_element_by_id("btn_login").click()
 
-#browser.close()
+time.sleep(4)
+browser.close()
 #关闭浏览器
