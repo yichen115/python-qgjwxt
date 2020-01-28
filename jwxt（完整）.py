@@ -17,11 +17,11 @@ def menu():
 	print("\n欢迎使用山东农业工程学院教务系统辅助脚本！")
 	print(time.strftime('%Y-%m-%d',time.localtime(time.time())))
 	while True:
-		print("\n功能菜单 v1.0\n")
-		print("0、banner 输入：0")
+		print("\n====== ★功能菜单★ ======\n")
+		print("0、看 logo 输入：0")
 		print("1、成绩查询 输入：1")
 		print("2、校历查看 输入：2")
-		print("3、退出 输入：3")
+		print("3、退出脚本 输入：3")
 		gnxz=input("\n[jwxt]等待输入:")
 		if gnxz=='0':
 			print(banner)
@@ -35,7 +35,8 @@ def menu():
 
 
 def ckxl():
-	browser.get("http://jwxt.sdaeu.edu.cn/_data/index_lookxl.aspx")
+	url=url0+"/_data/index_lookxl.aspx"
+	browser.get(url)
 	time.sleep(2)
 	while True:
 		print("\n====== 欢迎使用校历查看功能 ======\n")
@@ -44,7 +45,8 @@ def ckxl():
 		print('退出功能请输入：q')
 		year=input("\n[jwxt]等待输入：")
 		if year=='q':
-			browser.get('http://jwxt.sdaeu.edu.cn/MAINFRM.aspx')
+			url=url0+"/MAINFRM.aspx"
+			browser.get(url)
 			break
 		else:
 			year=year+'0'
@@ -66,7 +68,8 @@ def cjcx():
 	time.sleep(2)
 	browser.switch_to_frame('frmMain')
 	"""
-	browser.get('http://jwxt.sdaeu.edu.cn/xscj/Stu_MyScore.aspx')
+	url=url0+"/xscj/Stu_MyScore.aspx"
+	browser.get(url)
 	time.sleep(2)
 	#print(browser.page_source)
 	#WebDriverWait(browser, 20, 0.5).until(EC.presence_of_element_located((By.ID,'SelXNXQ_0')))
@@ -139,7 +142,8 @@ def cjcx():
 				time.sleep(6)
 				browser.save_screenshot('capture.png')
 		elif ckcj=='q':
-			browser.get('http://jwxt.sdaeu.edu.cn/MAINFRM.aspx')
+			url=url0+"/MAINFRM.aspx"
+			browser.get(url)
 			break
 
 
@@ -161,7 +165,8 @@ if __name__ == '__main__':
 	#设置user-agent的
 	#browser=webdriver.PhantomJS(executable_path='D:/software/phantomjs-2.1.1-windows/bin/phantomjs',service_args=proxy)
 	#设置代理的phantomjs
-	browser.get("http://jwxt.sdaeu.edu.cn/home.aspx")
+	url="http://jwxt.sdaeu.edu.cn"
+	browser.get(url)
 	#为了验证，暂时不用无界
 	
 	#chromeOptions = webdriver.ChromeOptions()
@@ -181,6 +186,8 @@ if __name__ == '__main__':
 	#打开chrome
 	
 	time.sleep(2)
+	url1=browser.current_url
+	url0=url1[0:-10]
 	browser.switch_to.frame('frm_login')
 	#跳转表单
 	
