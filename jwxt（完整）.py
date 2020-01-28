@@ -145,49 +145,7 @@ def cjcx():
 			url=url0+"/MAINFRM.aspx"
 			browser.get(url)
 			break
-
-
-if __name__ == '__main__':
-	
-	#proxy = [
-    #'--proxy=%s' % "127.0.0.1:8080", #设置的代理ip
-    #'--proxy-type=http',             #代理类型
-    #'--ignore-ssl-errors=true',      #忽略https错误
-	#]
-	
-	#设置phantomjs的user-agent
-	#dcap = dict(DesiredCapabilities.PHANTOMJS)
-	#dcap['phantomjs.page.settings.userAgent'] = ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36')
-	
-	browser=webdriver.PhantomJS(executable_path='D:/software/phantomjs-2.1.1-windows/bin/phantomjs')
-
-	#browser=webdriver.PhantomJS(executable_path='D:/software/phantomjs-2.1.1-windows/bin/phantomjs',desired_capabilities=dcap,service_args=['--ignore-ssl-errors=true'])
-	#设置user-agent的
-	#browser=webdriver.PhantomJS(executable_path='D:/software/phantomjs-2.1.1-windows/bin/phantomjs',service_args=proxy)
-	#设置代理的phantomjs
-	url="http://jwxt.sdaeu.edu.cn"
-	browser.get(url)
-	#为了验证，暂时不用无界
-	
-	#chromeOptions = webdriver.ChromeOptions()
-	#chromeOptions.add_argument("--proxy-server=http://127.0.0.1:8080")
-	#给chrome设置代理
-	
-	#option = webdriver.ChromeOptions()
-	#option.add_argument('headless')
-	#无界谷歌设置
-
-	#browser = webdriver.Chrome(chrome_options = chromeOptions)
-	#代理谷歌
-	#browser = webdriver.Chrome(chrome_options=option)
-	#无界谷歌
-	#browser = webdriver.Chrome()
-	#browser.get('http://jwxt.sdaeu.edu.cn/home.aspx')
-	#打开chrome
-	
-	time.sleep(2)
-	url1=browser.current_url
-	url0=url1[0:-10]
+def login():
 	browser.switch_to.frame('frm_login')
 	#跳转表单
 	
@@ -239,4 +197,48 @@ if __name__ == '__main__':
 	browser.find_element_by_id("btn_login").click()
 	time.sleep(1)
 	print("\n=========== 登录成功 ===========\n")
+
+if __name__ == '__main__':
+	
+	#proxy = [
+    #'--proxy=%s' % "127.0.0.1:8080", #设置的代理ip
+    #'--proxy-type=http',             #代理类型
+    #'--ignore-ssl-errors=true',      #忽略https错误
+	#]
+	
+	#设置phantomjs的user-agent
+	#dcap = dict(DesiredCapabilities.PHANTOMJS)
+	#dcap['phantomjs.page.settings.userAgent'] = ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36')
+	
+	browser=webdriver.PhantomJS(executable_path='D:/software/phantomjs-2.1.1-windows/bin/phantomjs')
+
+	#browser=webdriver.PhantomJS(executable_path='D:/software/phantomjs-2.1.1-windows/bin/phantomjs',desired_capabilities=dcap,service_args=['--ignore-ssl-errors=true'])
+	#设置user-agent的
+	#browser=webdriver.PhantomJS(executable_path='D:/software/phantomjs-2.1.1-windows/bin/phantomjs',service_args=proxy)
+	#设置代理的phantomjs
+	url="http://jwxt.sdaeu.edu.cn"
+	browser.get(url)
+	#为了验证，暂时不用无界
+	
+	#chromeOptions = webdriver.ChromeOptions()
+	#chromeOptions.add_argument("--proxy-server=http://127.0.0.1:8080")
+	#给chrome设置代理
+	
+	#option = webdriver.ChromeOptions()
+	#option.add_argument('headless')
+	#无界谷歌设置
+
+	#browser = webdriver.Chrome(chrome_options = chromeOptions)
+	#代理谷歌
+	#browser = webdriver.Chrome(chrome_options=option)
+	#无界谷歌
+	#browser = webdriver.Chrome()
+	#browser.get('http://jwxt.sdaeu.edu.cn/home.aspx')
+	#打开chrome
+	
+	time.sleep(2)
+	url1=browser.current_url
+	url0=url1[0:-10]
+	
+	login()
 	menu()

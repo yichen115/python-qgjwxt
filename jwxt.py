@@ -131,15 +131,8 @@ def cjcx():
 			browser.get(url)
 			break
 
-if __name__ == '__main__':
+def login():
 	
-	browser=webdriver.PhantomJS(executable_path='D:/software/phantomjs-2.1.1-windows/bin/phantomjs')
-	url="http://jwxt.sdaeu.edu.cn"
-	browser.get(url)
-
-	time.sleep(2)
-	url1=browser.current_url
-	url0=url1[0:-10]
 	browser.switch_to.frame('frm_login')
 	#跳转表单
 	
@@ -187,4 +180,16 @@ if __name__ == '__main__':
 	browser.find_element_by_id("btn_login").click()
 	time.sleep(1)
 	print("\n=========== 登录成功 ===========\n")
+
+if __name__ == '__main__':
+	browser=webdriver.PhantomJS(executable_path='D:/software/phantomjs-2.1.1-windows/bin/phantomjs')
+	url="http://jwxt.sdaeu.edu.cn"
+	
+	browser.get(url)
+	
+	time.sleep(2)
+	url1=browser.current_url
+	url0=url1[0:-10]
+	
+	login()
 	menu()
