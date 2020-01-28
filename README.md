@@ -1,5 +1,11 @@
 # 🎁python-qgjwxt
 
+**😊置顶**
+
+使用 pip3 install -r pyku.txt 来安装需要用到的 py 库
+
+
+
 ### 😘python 青果教务系统脚本
 
 #### 😋实现的功能
