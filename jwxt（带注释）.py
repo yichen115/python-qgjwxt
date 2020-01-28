@@ -33,6 +33,7 @@ def menu():
 			browser.quit()
 			break
 
+
 def ckxl():
 	browser.get("http://jwxt.sdaeu.edu.cn/_data/index_lookxl.aspx")
 	time.sleep(2)
@@ -55,10 +56,21 @@ def ckxl():
 def cjcx():
 
 	#成绩查询功能
-
+	"""
+	#browser.switch_to.default_content()
+	time.sleep(2)
+	browser.switch_to.frame('frmbody')
+	browser.find_element_by_id("memuBarText8").click()
+	#browser.find_element_by_id("memuBarBtn8").click()
+	browser.find_element_by_xpath("/html/body/form/table/tbody/tr/td[1]/div/table/tbody/tr[19]/td/table/tbody/tr/td[2]/span").click()
+	time.sleep(2)
+	browser.switch_to_frame('frmMain')
+	"""
 	browser.get('http://jwxt.sdaeu.edu.cn/xscj/Stu_MyScore.aspx')
 	time.sleep(2)
-
+	#print(browser.page_source)
+	#WebDriverWait(browser, 20, 0.5).until(EC.presence_of_element_located((By.ID,'SelXNXQ_0')))
+	
 	while True:
 		print("\n========== 欢迎使用成绩查询功能 ==========\n")
 		print("需要选择以下参数：")
@@ -133,17 +145,48 @@ def cjcx():
 
 if __name__ == '__main__':
 	
+	#proxy = [
+    #'--proxy=%s' % "127.0.0.1:8080", #设置的代理ip
+    #'--proxy-type=http',             #代理类型
+    #'--ignore-ssl-errors=true',      #忽略https错误
+	#]
+	
+	#设置phantomjs的user-agent
+	#dcap = dict(DesiredCapabilities.PHANTOMJS)
+	#dcap['phantomjs.page.settings.userAgent'] = ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36')
+	
 	browser=webdriver.PhantomJS(executable_path='D:/software/phantomjs-2.1.1-windows/bin/phantomjs')
 
+	#browser=webdriver.PhantomJS(executable_path='D:/software/phantomjs-2.1.1-windows/bin/phantomjs',desired_capabilities=dcap,service_args=['--ignore-ssl-errors=true'])
+	#设置user-agent的
+	#browser=webdriver.PhantomJS(executable_path='D:/software/phantomjs-2.1.1-windows/bin/phantomjs',service_args=proxy)
+	#设置代理的phantomjs
 	browser.get("http://jwxt.sdaeu.edu.cn/home.aspx")
+	#为了验证，暂时不用无界
+	
+	#chromeOptions = webdriver.ChromeOptions()
+	#chromeOptions.add_argument("--proxy-server=http://127.0.0.1:8080")
+	#给chrome设置代理
+	
+	#option = webdriver.ChromeOptions()
+	#option.add_argument('headless')
+	#无界谷歌设置
 
+	#browser = webdriver.Chrome(chrome_options = chromeOptions)
+	#代理谷歌
+	#browser = webdriver.Chrome(chrome_options=option)
+	#无界谷歌
+	#browser = webdriver.Chrome()
+	#browser.get('http://jwxt.sdaeu.edu.cn/home.aspx')
+	#打开chrome
+	
 	time.sleep(2)
 	browser.switch_to.frame('frm_login')
 	#跳转表单
 	
 	jpg=browser.find_element_by_id('imgCode')
 	img_src=jpg.get_attribute("src")
-
+	#print(img_src)
 	#拿到验证码url
 	print("\n[*]正在获取cookie...")
 	#在这里应该使用browser的ASP.NET_SessionId的值
@@ -164,6 +207,10 @@ if __name__ == '__main__':
 		'Accept-Language':'zh-CN,en,*',
 		'Host':'jwxt.sdaeu.edu.cn'
 	}
+	
+	#proxy1={"http":"http://127.0.0.1:8080"}
+	#r=requests.get(img_src,headers=headers1,proxies=proxy1)
+	#requests代理
 	
 	r=requests.get(img_src,headers=headers1)
 	img_content=r.content
