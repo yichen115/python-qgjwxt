@@ -21,7 +21,8 @@ def menu():
 		print("0、看 logo 输入：0")
 		print("1、成绩查询 输入：1")
 		print("2、校历查看 输入：2")
-		print("3、退出脚本 输入：3")
+		print("3、课表查询 输入：3")
+		print("4、退出脚本 输入：4")
 		gnxz=input("\n[jwxt]等待输入:")
 		if gnxz=='0':
 			print(banner)
@@ -30,9 +31,31 @@ def menu():
 		if gnxz=='2':
 			ckxl()
 		if gnxz=='3':
+			kbcx()
+		if gnxz=='4':
 			browser.quit()
 			break
 
+def kbcx():
+	url=url0+"/znpk/Pri_StuSel.aspx"
+	browser.get(url)
+	time.sleep(2)
+	while True:
+		print("\n====== 欢迎使用课表查询功能 ======\n")
+		xnxq = Select(browser.find_element_by_name('Sel_XNXQ'))
+		print('请输入需要查看的学年学期：2019第一学期：20190，第二学期：20191')
+		print('退出功能请输入：q')
+		year=input("\n[jwxt]等待输入：")
+		if year=='q':
+			url=url0+"/MAINFRM.aspx"
+			browser.get(url)
+			break
+		else:
+			xnxq.select_by_value(year)
+			browser.find_element_by_id("rad_gs1").click()
+			browser.find_element_by_name("btnSearch").click()
+			time.sleep(6)
+			browser.save_screenshot('课表.png')
 
 def ckxl():
 	url=url0+"/_data/index_lookxl.aspx"
